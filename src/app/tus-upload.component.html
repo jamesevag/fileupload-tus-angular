@@ -1,0 +1,17 @@
+<div class="upload-container">
+  <h2>Select a file to upload</h2>
+
+  <input type="file" (change)="onFileSelected($event)" #fileInput />
+
+  <button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
+
+  <div class="progress-container" *ngIf="progress$ | async as progress">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progress"></div>
+    </div>
+    <div class="progress-text">
+      <span *ngIf="progress < 100">Uploading... {{ progress.toFixed(2) }}%</span>
+      <span *ngIf="progress === 100">✅ Upload Complete!</span>
+    </div>
+  </div>
+</div>
