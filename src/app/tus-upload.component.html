@@ -1,17 +1,11 @@
-<div class="upload-container">
+<div>
   <h2>Select a file to upload</h2>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
 
-  <input type="file" (change)="onFileSelected($event)" #fileInput />
-
-  <button [disabled]="!selectedFile" (click)="onUpload()">Upload</button>
-
-  <div class="progress-container" *ngIf="progress$ | async as progress">
-    <div class="progress-bar">
-      <div class="progress-fill" [style.width.%]="progress"></div>
+    <div style="height: 24px; width: 100%; background-color: #eee; border-radius: 4px;">
+      <div [style.width.%]="progress"
+           style="height: 100%; background-color: #4caf50; transition: width 0.2s ease;"></div>
     </div>
-    <div class="progress-text">
-      <span *ngIf="progress < 100">Uploading... {{ progress.toFixed(2) }}%</span>
-      <span *ngIf="progress === 100">✅ Upload Complete!</span>
-    </div>
-  </div>
+    <p>{{ progress.toFixed(2) }}%</p>
 </div>
